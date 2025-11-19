@@ -1,0 +1,75 @@
+:root {
+    --accent: #e74c3c;
+    --bg: #fff;
+    --muted: #666
+}
+
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
+    margin: 0;
+    padding: 16px;
+    background: var(--bg);
+    color: #111
+}
+
+.card {
+    max-width: 720px;
+    margin: 12px auto;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    background: #fafafa
+}
+
+.center {
+    text-align: center
+}
+
+.btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600
+}
+
+.btn:disabled {
+    opacity: .6;
+    cursor: not-allowed
+}
+
+.small {
+    font-size: 0.9rem;
+    color: var(--muted)
+}
+
+.qr {
+    max-width: 220px;
+    margin: 12px auto;
+    display: block
+}
+
+.flex {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.floating-embed {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 9999
+}
+
+.embed-btn {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer
+}

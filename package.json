@@ -1,0 +1,24 @@
+{
+    "name": "confusion-radar",
+    "version": "1.0.0",
+    "description": "Simple in-memory Confusion Radar widget for presentations",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "NODE_ENV=development node server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2",
+        "helmet": "^7.0.0",
+        "nanoid": "^4.0.0",
+        "compression": "^1.7.4",
+        "express-rate-limit": "^6.8.0",
+        "morgan": "^1.10.0",
+        "qrcode": "^1.5.1",
+        "socket.io": "^4.7.2"
+    }
+}

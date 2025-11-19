@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Confusion Radar — Student</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="card center">
+        <h2>Confusion Radar</h2>
+        <p class="small">Press the button when you're confused — anonymous and instant.</p>
+
+        <div id="joinArea">
+            <label>Session code:</label>
+            <input id="codeInput" placeholder="Enter code or scan QR" />
+            <button id="joinBtn" class="btn">Join</button>
+        </div>
+
+        <div id="sessionArea" style="display:none">
+            <p>Session: <strong id="sessionCode"></strong></p>
+            <button id="confusedBtn" class="btn">I'm confused</button>
+            <p class="small">Count: <span id="count">0</span></p>
+        </div>
+    </div>
+
+    <script src="/student.js"></script>
+</body>
+
+</html>
