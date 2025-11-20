@@ -28,7 +28,19 @@ app.use(helmet({
             imgSrc: ["'self'", 'data:'],
             // allow websocket / XHR/fetch connections back to this host so the widget can talk to the API/socket
             connectSrc: ["'self'", 'https://confusion-radar.onrender.com', 'wss://confusion-radar.onrender.com', 'https://*.office.com', 'https://*.officeapps.live.com', 'https://*.microsoft.com'],
-            frameAncestors: ["'self'", 'https://*.office.com', 'https://*.officeapps.live.com', 'https://*.microsoft.com']
+            frameAncestors: [
+                "'self'",
+                'https://*.office.com',
+                'https://*.officeapps.live.com',
+                'https://*.microsoft.com',
+                'https://*.office365.com',
+                'https://*.sharepoint.com',
+                'https://*.sharepoint-df.com',
+                'https://*.cdn.office.net',
+                'https://*.officeppe.net',
+                'https://*.officeapps-df.live.com',
+                'https://*.powerpoint.office.com'
+            ]
         }
     },
     frameguard: false
