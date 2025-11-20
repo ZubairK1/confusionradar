@@ -17,6 +17,20 @@ const io = new Server(server);
 // Trust proxy when running behind a load-balancer (set via env when appropriate)
 app.set('trust proxy', process.env.TRUST_PROXY === 'true' || true);
 
+// Helmet - add CSP including frame-ancestors (allow Office embedding)
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'"],
+            styleSrc: ["'self'"],
+            imgSrc: ["'self'", 'data:'],
+            frameAncestors: ["'self'", 'https://*.office.com', 'https://*.officeapps.live.com', 'https://*.microsoft.com']
+        }
+    },
+    frameguard: false
+}));
+
 // Logging
 if (process.env.NODE_ENV === 'production') {
     app.use(morgan('combined'));

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Confusion Radar — Widget</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="card center" style="width:320px; padding:12px;">
+        <h3 style="margin:6px 0">Confusion</h3>
+        <div id="codeLine" class="small">Session: <strong id="wCode">—</strong></div>
+        <div style="font-size:32px;margin:10px 0;font-weight:700" id="wCount">0</div>
+        <div class="flex" style="justify-content:center">
+            <button id="wConfused" class="btn">I'm confused</button>
+            <button id="wReset" class="btn" style="background:#888">Reset</button>
+        </div>
+        <p class="small" style="margin-top:8px">Status: <span id="wStatus">disconnected</span></p>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/widget.js"></script>
+</body>
+
+</html>
