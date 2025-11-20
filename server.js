@@ -18,6 +18,7 @@ const io = new Server(server);
 app.set('trust proxy', process.env.TRUST_PROXY === 'true' || true);
 
 // Helmet - add CSP including frame-ancestors (allow Office embedding)
+// Also permit connect-src for sockets/api calls from the add-in running inside Office
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
@@ -25,6 +26,8 @@ app.use(helmet({
             scriptSrc: ["'self'"],
             styleSrc: ["'self'"],
             imgSrc: ["'self'", 'data:'],
+            // allow websocket / XHR/fetch connections back to this host so the widget can talk to the API/socket
+            connectSrc: ["'self'", 'https://confusion-radar.onrender.com', 'wss://confusion-radar.onrender.com', 'https://*.office.com', 'https://*.officeapps.live.com', 'https://*.microsoft.com'],
             frameAncestors: ["'self'", 'https://*.office.com', 'https://*.officeapps.live.com', 'https://*.microsoft.com']
         }
     },
