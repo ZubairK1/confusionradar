@@ -13,11 +13,26 @@
 
     function setStatus(s) { wStatus.textContent = s; }
 
-    function joinRoom() {
+    async function joinRoom() {
+        if (!code) {
+            // try to auto-join current session from server
+            try {
+                const r = await fetch('/api/session/current');
+                if (r.ok) {
+                    const j = await r.json();
+                    code = (j.code || '').toUpperCase();
+                }
+            } catch (e) {/* ignore */ }
+        }
         if (!code) return setStatus('no code');
         socket.emit('join', code);
         wCode.textContent = code;
         setStatus('connected');
+        // if widget loaded with reset param, request server to reset current session
+        const params = new URLSearchParams(location.search);
+        if (params.get('reset') === '1') {
+            try { await fetch('/api/session/current/reset', { method: 'POST' }); wCount.textContent = 0; } catch (e) { }
+        }
     }
 
     socket.on('connect', () => { setStatus('connected'); if (code) joinRoom(); });

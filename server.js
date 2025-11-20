@@ -55,6 +55,9 @@ const PORT = process.env.PORT || 3000;
 const sessions = Object.create(null);
 const SESSION_TTL_MS = Number(process.env.SESSION_TTL_MS) || 12 * 60 * 60 * 1000; // 12 hours
 
+// track the current (latest) lecturer session so widgets can auto-join
+let currentSession = null;
+
 // Rate limiters
 const createSessionLimiter = rateLimit({ windowMs: 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false });
 const pressLimiter = rateLimit({ windowMs: 10 * 1000, max: 10, standardHeaders: true, legacyHeaders: false });
@@ -63,6 +66,8 @@ function createSession() {
     const code = nanoid(6).toUpperCase();
     const now = Date.now();
     sessions[code] = { count: 0, presses: [], createdAt: now, lastActive: now };
+    // set as current session by default
+    currentSession = code;
     // schedule cleanup
     setTimeout(() => {
         if (sessions[code] && Date.now() - sessions[code].lastActive >= SESSION_TTL_MS) {
@@ -87,6 +92,21 @@ app.post('/api/session', createSessionLimiter, async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Failed to generate QR' });
     }
+});
+
+// Return the current session code (if any)
+app.get('/api/session/current', (req, res) => {
+    if (!currentSession || !sessions[currentSession]) return res.status(404).json({ error: 'No current session' });
+    res.json({ code: currentSession });
+});
+
+// Reset the current session (useful for content add-ins that reset on load)
+app.post('/api/session/current/reset', (req, res) => {
+    if (!currentSession || !sessions[currentSession]) return res.status(404).json({ error: 'No current session' });
+    const s = sessions[currentSession];
+    s.count = 0; s.presses = []; s.lastActive = Date.now();
+    io.to(currentSession).emit('update', { count: s.count });
+    res.json({ ok: true });
 });
 
 // Get session info

@@ -46,9 +46,12 @@
         <label for="code">Session code</label>
         <input id="code" placeholder="Enter code (e.g. HVJYFQ)" />
         <button id="set">Set</button>
+        <button id="create" style="background:#2d8cff">Create</button>
         <button id="reset" style="background:#888">Reset</button>
     </div>
-    <p class="small">The widget loads inside the iframe below. Use Set to connect to a session, Reset to clear it.</p>
+    <p class="small">Create a session to show QR (lecturer), or Set a code to join.</p>
+    <div style="margin-top:8px"><img id="qrImg" src="" alt="QR"
+            style="max-width:140px;display:none;border-radius:8px;border:1px solid #eee" /></div>
     <iframe id="widgetFrame" src="/widget.html" title="Confusion Radar Widget"></iframe>
 
     <script src="/addin/taskpane.js"></script>
